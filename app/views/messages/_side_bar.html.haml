@@ -1,0 +1,20 @@
+.side
+  .side__header
+    .side__header__box
+      %p.user-name
+        toma
+      %ul.menu
+        %li.new.group
+        = link_to "#", class: "contents__btn" do
+          = icon('fa', 'cog')
+        %li.edit.user
+        = link_to "#", class: "contents__btn" do
+          = icon('fa', 'edit')
+  .groups
+    .group
+      %p.group__name
+        techcamp
+      %p.group__message
+        まだ
+
+
