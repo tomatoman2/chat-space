@@ -5,16 +5,18 @@
         = current_user.name
       %ul.menu
         %li.new.group
-        = link_to "#", class: "contents__btn" do
+        = link_to new_group_path, class: "contents__btn" do
           = icon('fa', 'cog')
         %li.edit.user
         = link_to edit_user_path(current_user) do
           = icon('fa', 'edit')
   .groups
-    .group
-      %p.group__name
-        techcamp
-      %p.group__message
-        まだ
+    - current_user.groups.each do |group|
+      .group
+        = link_to '#' do
+          %p.group__name
+            = group.name
+          %p.group__message
+            メッセージはまだありません。
 
 
