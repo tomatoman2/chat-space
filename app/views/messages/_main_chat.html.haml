@@ -1,0 +1,36 @@
+.chat
+  .main__header
+    .main__header__leftbox
+      %h2.group
+        test
+      %ul.member-list
+        member:
+        %li.member
+          toma
+    .edit
+      edit
+  .messages
+    .message
+      .message__info
+        %p.message__info__name
+          toma
+        %p.message__info__date
+          2020/03/26 18:00 
+      .message__text
+        好きだ
+    .message
+      .message__info
+        %p.message__info__name
+          remo
+        %p.message__info__date
+          2020/03/26 20:00 
+      .message__text
+        きいろ
+  .form
+    %form.new__message
+      .input__box
+        %input{type: "text", class: "input__box__text", placeholder: "type a message"}
+        %label{class: "input__box__image"}
+          = icon('fa', 'image')
+          %input{type: "file", class: "input__box__image__file"}
+      %input{type: "submit", class: "submit-btn"}
