@@ -10,12 +10,13 @@
     .edit
       edit
   .messages
+    = render @messages    
     .message
       .message__info
         %p.message__info__name
-          toma
+          = message.user.name
         %p.message__info__date
-          2020/03/26 18:00 
+          = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
       .message__text
         好きだ
     .message
@@ -27,10 +28,11 @@
       .message__text
         きいろ
   .form
-    %form.new__message
+    = form_for [@group, @message] do |f|
       .input__box
-        %input{type: "text", class: "input__box__text", placeholder: "type a message"}
-        %label{class: "input__box__image"}
-          = icon('fa', 'image')
-          %input{type: "file", class: "input__box__image__file"}
-      %input{type: "submit", class: "submit-btn"}
+          = f.text_field :content, class: 'input__box__text', placeholder: 'type a message'
+            = f.label :image, class: 'input__box__image' do
+            = icon('fa', 'image')
+            = f.file_field :image, class: 'input__box__image__file'
+        = f.submit 'Send', class: "submit-btn"
+
