@@ -2,37 +2,22 @@
   .main__header
     .main__header__leftbox
       %h2.group
-        test
+        = @group.name
       %ul.member-list
-        member:
-        %li.member
-          toma
+        Member :
+        - @group.users.each do |user|
+          = user.name
+        %li.member    
     .edit
-      edit
+      .a
+      = link_to "Edit", edit_group_path(@group.id)
   .messages
     = render @messages    
-    .message
-      .message__info
-        %p.message__info__name
-          = message.user.name
-        %p.message__info__date
-          = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
-      .message__text
-        好きだ
-    .message
-      .message__info
-        %p.message__info__name
-          remo
-        %p.message__info__date
-          2020/03/26 20:00 
-      .message__text
-        きいろ
   .form
     = form_for [@group, @message] do |f|
-      .input__box
-          = f.text_field :content, class: 'input__box__text', placeholder: 'type a message'
-            = f.label :image, class: 'input__box__image' do
-            = icon('fa', 'image')
-            = f.file_field :image, class: 'input__box__image__file'
-        = f.submit 'Send', class: "submit-btn"
-
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+      .form__mask
+        = f.label :image, class: 'form__mask__image' do
+          = icon('fa', 'image', class: 'icon')
+          = f.file_field :image, class: 'hidden'
+      = f.submit 'Send', class: 'form__submit'
