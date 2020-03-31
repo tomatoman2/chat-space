@@ -1,52 +1,53 @@
 $(function () {
   function buildHTML(message) {
     if (message.content && message.image) {
-      var html = `<div class="message">` +
-        `<div class="message__info">` +
-        `<div class="message__info__name">` +
-        message.user_name +
-        `</div>` +
-        `<div class="message__info__date">` +
-        message.created_at +
-        `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-        `<p class="message__text__content">` +
-        message.content +
-        `</p>` +
-        `<img src="` + message.image + `" class="message__text__image" >` +
-        `</div>` +
-        `</div>`
-    } else if (message.content) {
-      var html = `<div class="message">` +
-        `<div class="message__info">` +
-        `<div class="message__info__name">` +
-        message.user_name +
-        `</div>` +
-        `<div class="message__info__date">` +
-        message.created_at +
-        `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-        `<p class="message__text__content">` +
-        message.content +
-        `</p>` +
-        `</div>` +
-        `</div>`
-    } else if (message.image) {
-      var html = `<div class="message">` +
-        `<div class="message__info">` +
-        `<div class="message__info__name">` +
-        message.user_name +
-        `</div>` +
-        `<div class="message__info__date">` +
-        message.created_at +
-        `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-        `<img src="` + message.image + `" class="message__text__image" >` +
-        `</div>` +
-        `</div>`
+      var html = `<div class="message">
+                    <div class="message__info">
+                      <div class="message__info__name">
+                      ${message.user_name}
+                      </div>
+                      <div class="message__info__date">
+                      ${message.created_at}
+                      </div>
+                    </div> 
+                    <div class="message__text">
+                      <p class="message__text__content">
+                      ${message.content}
+                      </p>
+                      <img src=" ${message.image}" class="message__text__image" >
+                    </div>
+                  </div>`
+    } 
+    else if (message.content) {
+      var html = `<div class="message">
+                    <div class="message__info">
+                      <div class="message__info__name">
+                      ${message.user_name}
+                      </div>
+                      <div class="message__info__date">
+                      ${message.created_at}
+                      </div>
+                    </div>
+                    <div class="message__text">
+                      <p class="message__text__content">
+                      ${message.content}
+                      </p>
+                    </div>
+                  </div>`
+    }else if (message.image) {
+      var html = `<div class="message">
+                    <div class="message__info">
+                      <div class="message__info__name">
+                      ${message.user_name}
+                      </div>
+                      <div class="message__info__date">
+                      ${message.created_at}
+                      </div>
+                    </div>
+                    <div class="message__text">
+                      <img src=" ${message.image}" class="message__text__image" >
+                    </div>
+                  </div>`
     };
     return html;
   }
@@ -67,10 +68,12 @@ $(function () {
         $('.messages').append(html);
         $('form')[0].reset();
         $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
-        $('input').prop('disabled', false);
       })
       .fail(function() {
         alert("メッセージ送信に失敗しました");
+      })
+      .always(function(){
+        $('input').prop('disabled', false);
       });
   })
 })
