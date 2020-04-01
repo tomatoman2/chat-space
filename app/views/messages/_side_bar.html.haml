@@ -4,12 +4,12 @@
       %p.user-name
         = current_user.name
       %ul.menu
-        %li.edit.user
-        = link_to edit_user_path(current_user) do
-          = icon('fa', 'edit')
         %li.new.group
         = link_to new_group_path, class: "contents__btn" do
-          = icon('fa', 'cog')       
+          = icon('fa', 'edit')
+        %li.edit.user
+        = link_to edit_user_path(current_user) do
+          = icon('fa', 'cog')
   .groups
     - current_user.groups.each do |group|
       .group
