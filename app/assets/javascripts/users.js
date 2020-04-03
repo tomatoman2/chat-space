@@ -1,4 +1,11 @@
-$(function() {
+$(function() {  
+  window.onload = function(){
+  var userIds = [];
+  var user = $(".js-chat-member").each(function(index, ele){
+    var userId = $(ele).attr('id')
+    userIds.push(userId);
+  })
+
   function addUser(user) {
     let html = `
       <div class="chat-group-user clearfix">
@@ -34,7 +41,8 @@ $(function() {
     $.ajax({
       type: "GET",
       url: "/users",
-      data: { keyword: input },
+      data: { keyword: input, 
+              userIds: userIds},
       dataType: "json"
     })
       .done(function(users) {
@@ -55,7 +63,6 @@ $(function() {
       });
   });
   $(document).on("click", ".chat-group-user__btn--add", function() {
-    console.log
     const userName = $(this).attr("data-user-name");
     const userId = $(this).attr("data-user-id");
     $(this)
@@ -63,10 +70,17 @@ $(function() {
       .remove();
     addDeleteUser(userName, userId);
     addMember(userId);
+    userIds.push(userId);
   });
   $(document).on("click", ".chat-group-user__btn--remove", function() {
+    const userId = $(this).parent().attr("id");
     $(this)
       .parent()
       .remove();
+      var num = userIds.filter(function(value){
+        return value !== userId;
+      })
+      userIds = num;
   });
+}
 });
